@@ -1,28 +1,33 @@
 package com.example.demo;
 
-import java.util.Date;
-
 public class Concert implements Event{
     private int concertId;
     private String artist;
     private String date;
-    private String address;
-    private String arena;
-    private String city;
     private int ticketPrice;
-    private int arenaCapacity;
+    private Arena arena;
+    private int bookings;
+    private String concertDescription;
+
+    public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, int bookings, String concertDescription) {
+        this.concertId = concertId;
+        this.artist = artist;
+        this.date = date;
+        this.ticketPrice = ticketPrice;
+        this.arena = arena;
+        this.bookings = bookings;
+        this.concertDescription = concertDescription;
+    }
 
     public Concert() {
     }
 
-    public Concert(String artist, String date, String address, String arena, String city, int ticketPrice, int arenaCapacity) {
-        this.artist = artist;
-        this.date = date;
-        this.address = address;
-        this.arena = arena;
-        this.city = city;
-        this.ticketPrice = ticketPrice;
-        this.arenaCapacity = arenaCapacity;
+    public int getConcertId() {
+        return concertId;
+    }
+
+    public void setConcertId(int concertId) {
+        this.concertId = concertId;
     }
 
     public String getArtist() {
@@ -41,30 +46,6 @@ public class Concert implements Event{
         this.date = date;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getArena() {
-        return arena;
-    }
-
-    public void setArena(String arena) {
-        this.arena = arena;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public int getTicketPrice() {
         return ticketPrice;
     }
@@ -73,11 +54,19 @@ public class Concert implements Event{
         this.ticketPrice = ticketPrice;
     }
 
-    public int getArenaCapacity() {
-        return arenaCapacity;
+    public Arena getArena() {
+        return arena;
     }
 
-    public void setArenaCapacity(int arenaCapacity) {
-        this.arenaCapacity = arenaCapacity;
+    public void setArena(Arena arena) {
+        this.arena = arena;
+    }
+
+    public void setBookings(int bookings) {
+        this.bookings = bookings;
+    }
+
+    public void setConcertDescription(String concertDescription) {
+        this.concertDescription = concertDescription;
     }
 }
