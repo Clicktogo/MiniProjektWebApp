@@ -30,6 +30,6 @@ public class UnitTest {
 
         List<Concert> sortedList = eventService.sortByArtistName();
 
-        Assert.assertEquals(testList, sortedList);
+        Assert.assertEquals(testList.toString(), sortedList.toString());
     }
 }
