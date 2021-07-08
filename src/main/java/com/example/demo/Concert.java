@@ -66,6 +66,10 @@ public class Concert implements Event, Comparable<Concert>{
         this.concertDescription = concertDescription;
     }
 
+    public String getConcertDescription() {
+        return concertDescription;
+    }
+
     @Override
     public int compareTo(Concert concert) {
         if (this.artist.charAt(0) == concert.artist.charAt(0)) {
