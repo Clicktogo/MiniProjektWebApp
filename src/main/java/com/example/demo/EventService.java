@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,24 @@ public class EventService {
             }
         }
         return null;
+    }
+
+    public List<Concert> getCityFilteredConcerts(String city) {
+        List<Concert> filteredList = new ArrayList<>();
+        for (Concert c : concertRepository.getConcerts()){
+            if (c.getArena().getCity().equalsIgnoreCase("Malmö")) {
+                filteredList.add(c);
+            }
+            if (c.getArena().getCity().equalsIgnoreCase("Stockholm")) {
+                filteredList.add(c);
+            }
+            if (c.getArena().getCity().equalsIgnoreCase("Örebro")) {
+                filteredList.add(c);
+            }
+            if (c.getArena().getCity().equalsIgnoreCase("Göteborg")) {
+                filteredList.add(c);
+            }
+        }
+        return filteredList;
     }
 }
