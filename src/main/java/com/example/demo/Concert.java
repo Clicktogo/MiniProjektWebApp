@@ -1,6 +1,8 @@
 package com.example.demo;
 
-public class Concert implements Event{
+import java.util.Comparator;
+
+public class Concert implements Event, Comparable<Concert>{
     private int concertId;
     private String artist;
     private String date;
@@ -62,5 +64,15 @@ public class Concert implements Event{
 
     public void setConcertDescription(String concertDescription) {
         this.concertDescription = concertDescription;
+    }
+
+    @Override
+    public int compareTo(Concert concert) {
+        if (this.artist.charAt(0) == concert.artist.charAt(0)) {
+            return 0;
+        } else if (this.artist.charAt(0) < concert.artist.charAt(0)) {
+            return -1;
+        }
+        return 1;
     }
 }

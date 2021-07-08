@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class EventService {
 
     public List<Concert> sortByArtistName() {
         List<Concert> concertList = concertRepository.getConcerts();
-
+        Collections.sort(concertList);
         return concertList;
     }
 

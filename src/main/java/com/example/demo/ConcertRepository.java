@@ -8,7 +8,12 @@ import java.util.List;
 @Repository
 public class ConcertRepository {
 
-    List<Concert> concerts = new ArrayList<>();
+    List<Concert> concerts;
+
+    public ConcertRepository() {
+        concerts = new ArrayList<>();
+        basicConcerts();
+    }
 
     public void basicConcerts() {
         concerts.add(new Concert(1, "Iron Maiden", "12/8", 1099, new Arena("Ullevi", "Ullevigatan", "Göteborg", 75000), "Bla bla bla"));
