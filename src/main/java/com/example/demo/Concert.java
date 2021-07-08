@@ -6,16 +6,14 @@ public class Concert implements Event{
     private String date;
     private int ticketPrice;
     private Arena arena;
-    private int bookings;
     private String concertDescription;
 
-    public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, int bookings, String concertDescription) {
+    public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
         this.concertId = concertId;
         this.artist = artist;
         this.date = date;
         this.ticketPrice = ticketPrice;
         this.arena = arena;
-        this.bookings = bookings;
         this.concertDescription = concertDescription;
     }
 
@@ -60,10 +58,6 @@ public class Concert implements Event{
 
     public void setArena(Arena arena) {
         this.arena = arena;
-    }
-
-    public void setBookings(int bookings) {
-        this.bookings = bookings;
     }
 
     public void setConcertDescription(String concertDescription) {
