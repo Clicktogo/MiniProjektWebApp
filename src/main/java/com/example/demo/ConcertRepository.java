@@ -23,5 +23,7 @@ public class ConcertRepository {
         concerts.add(concert);
     }
 
-
+    public List<Concert> getConcerts() {
+        return concerts;
+    }
 }
