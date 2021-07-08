@@ -28,15 +28,21 @@ public class ConcertController {
         return "masterDetailConcert";
     }
 
-    @PostMapping("/")
-    public String filter(Model model, @RequestParam String filterSelection) {
-        if (filterSelection.equalsIgnoreCase("Pris"))   {
+    @PostMapping("/sort")
+    public String sorting(Model model, @RequestParam String sortSelection) {
+        if (sortSelection.equalsIgnoreCase("Pris"))   {
             model.addAttribute("concertList", service.sortByPrice());
         }
-        else if (filterSelection.equalsIgnoreCase("Artist"))    {
+        else if (sortSelection.equalsIgnoreCase("Artist"))    {
             service.sortByArtistName();
             model.addAttribute("concertList", service.sortByArtistName());
         }
+        return "allEvents";
+    }
+
+    @PostMapping("/filter")
+    public String filter(Model model, @RequestParam String filterSelection) {
+        model.addAttribute("concertList", service.getCityFilteredConcerts(filterSelection));
         return "allEvents";
     }
 
