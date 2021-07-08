@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" th:href="${'/style.css'}" href="../static/style.css">
+    <title>Shopping Cart</title>
+</head>
+<body>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Artist</th>
+        <th scope="col">Ort</th>
+        <th scope="col">Pris</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="concert: ${session.shoppingCart}">
+        <th scope="row">1</th>
+        <td th:text="${concert.artist}"></td>
+        <td th:text="${concert.arena.city}"></td>
+        <td th:text="${concert.ticketPrice}"></td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -39,7 +39,7 @@ public class EventService {
         return concertRepository.getConcerts();
     }
 
-    public Object getConcertById(int eventId) {
+    public Concert getConcertById(int eventId) {
         for (Concert c : concertRepository.getConcerts()){
             if (c.getConcertId() == eventId) {
                 return c;

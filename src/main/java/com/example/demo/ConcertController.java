@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ConcertController {
@@ -40,4 +42,18 @@ public class ConcertController {
         return "allEvents";
     }
 
+    @GetMapping("/shoppingcart")
+    public String addToShoppingCart(HttpSession session, @RequestParam int concertId, @RequestParam int ticketQuantity){
+        List<Concert> shoppingCartList = (List<Concert>) session.getAttribute("shoppingCart");
+
+        if(shoppingCartList == null) {
+            shoppingCartList = new ArrayList<>();
+        }
+
+        shoppingCartList.add(service.getConcertById(concertId));
+        session.setAttribute("itemsInCart", shoppingCartList.size());
+        session.setAttribute("shoppingCart", shoppingCartList);
+
+        return ("/shoppingCart");
+    }
 }
