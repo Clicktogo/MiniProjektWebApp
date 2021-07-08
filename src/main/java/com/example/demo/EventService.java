@@ -28,7 +28,8 @@ public class EventService {
         return concertList;
     }
 
-    public List<Concert> getConcerts() {
+    public List<Concert> getAllConcerts() {
+        concertRepository.basicConcerts();
         return concertRepository.getConcerts();
     }
 
