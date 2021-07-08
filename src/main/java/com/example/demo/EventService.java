@@ -15,6 +15,10 @@ public class EventService {
     @Autowired
     ConcertRepository concertRepository;
 
+    public EventService() {
+        this.concertRepository = new ConcertRepository();
+    }
+
     public void addConcert(Concert concert) {
         concertRepository.addConcert(concert);
     }

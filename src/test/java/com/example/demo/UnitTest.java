@@ -1,11 +1,19 @@
 package com.example.demo;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UnitTest {
+
+    @Test
+    public void buyTicketTest(){
+        EventService service =  new EventService();
+        Concert testConcert = new Concert(1, "Iron Maiden", "12/8", 1099, new Arena("Ullevi", "Ullevigatan", "Göteborg", 75000), "Bla bla bla");
+        Assert.assertTrue(service.buyTickets(testConcert, 75000));
+    }
 
 
     @Test
