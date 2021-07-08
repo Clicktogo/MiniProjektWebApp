@@ -75,4 +75,16 @@ public class Concert implements Event, Comparable<Concert>{
         }
         return 1;
     }
+
+    @Override
+    public String toString() {
+        return "Concert{" +
+                "concertId=" + concertId +
+                ", artist='" + artist + '\'' +
+                ", date='" + date + '\'' +
+                ", ticketPrice=" + ticketPrice +
+                ", arena=" + arena +
+                ", concertDescription='" + concertDescription + '\'' +
+                '}';
+    }
 }

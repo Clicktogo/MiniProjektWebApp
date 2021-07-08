@@ -14,6 +14,10 @@ public class EventService {
     @Autowired
     ConcertRepository concertRepository;
 
+    public EventService() {
+        concertRepository = new ConcertRepository();
+    }
+
     public void addConcert(Concert concert) {
         concertRepository.addConcert(concert);
     }
@@ -34,5 +38,9 @@ public class EventService {
         concertRepository.basicConcerts();
         return concertRepository.getConcerts();
     }
+
+    public Concert getConcertByID
+
+
 
 }
