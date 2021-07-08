@@ -18,6 +18,7 @@ public class Concert implements Event, Comparable<Concert>{
         this.ticketPrice = ticketPrice;
         this.arena = arena;
         this.concertDescription = concertDescription;
+        this.ticketsSold = 0;
     }
 
     public Concert() {
@@ -90,5 +91,18 @@ public class Concert implements Event, Comparable<Concert>{
             return -1;
         }
         return 1;
+    }
+
+    @Override
+    public String toString() {
+        return "Concert{" +
+                "concertId=" + concertId +
+                ", artist='" + artist + '\'' +
+                ", date='" + date + '\'' +
+                ", ticketPrice=" + ticketPrice +
+                ", arena=" + arena +
+                ", concertDescription='" + concertDescription + '\'' +
+                ", ticketsSold=" + ticketsSold +
+                '}';
     }
 }

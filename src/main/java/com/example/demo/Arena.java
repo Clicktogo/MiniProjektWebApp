@@ -44,4 +44,14 @@ public class Arena {
     public void setArenaCapacity(int arenaCapacity) {
         this.arenaCapacity = arenaCapacity;
     }
+
+    @Override
+    public String toString() {
+        return "Arena{" +
+                "arenaName='" + arenaName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", arenaCapacity=" + arenaCapacity +
+                '}';
+    }
 }
