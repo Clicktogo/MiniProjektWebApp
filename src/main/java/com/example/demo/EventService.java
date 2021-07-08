@@ -51,16 +51,7 @@ public class EventService {
     public List<Concert> getCityFilteredConcerts(String city) {
         List<Concert> filteredList = new ArrayList<>();
         for (Concert c : concertRepository.getConcerts()){
-            if (c.getArena().getCity().equalsIgnoreCase("Malmö")) {
-                filteredList.add(c);
-            }
-            if (c.getArena().getCity().equalsIgnoreCase("Stockholm")) {
-                filteredList.add(c);
-            }
-            if (c.getArena().getCity().equalsIgnoreCase("Örebro")) {
-                filteredList.add(c);
-            }
-            if (c.getArena().getCity().equalsIgnoreCase("Göteborg")) {
+            if (c.getArena().getCity().equalsIgnoreCase(city)) {
                 filteredList.add(c);
             }
         }
