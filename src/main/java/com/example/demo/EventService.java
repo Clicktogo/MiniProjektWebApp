@@ -63,4 +63,14 @@ public class EventService {
         }
         return filteredList;
     }
+
+    //Maybe break into two methods, one checking and one buying
+    public boolean buyTickets(Concert concert, int tickets) {
+        if(concert.isNotFull(tickets)) {
+            concert.buyTicket(tickets);
+            return true;
+        }
+        return false;
+    }
+
 }

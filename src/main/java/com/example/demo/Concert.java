@@ -9,6 +9,7 @@ public class Concert implements Event, Comparable<Concert>{
     private int ticketPrice;
     private Arena arena;
     private String concertDescription;
+    private int ticketsSold;
 
     public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
         this.concertId = concertId;
@@ -68,6 +69,17 @@ public class Concert implements Event, Comparable<Concert>{
 
     public String getConcertDescription() {
         return concertDescription;
+    }
+
+    public boolean isNotFull(int tickets) {
+        if( ticketsSold + tickets <= arena.getArenaCapacity()) {
+            return true;
+        }
+    return false;
+    }
+
+    public void buyTicket(int tickets) {
+      ticketsSold += tickets;
     }
 
     @Override
