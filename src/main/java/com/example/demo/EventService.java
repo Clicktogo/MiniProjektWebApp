@@ -36,7 +36,6 @@ public class EventService {
     }
 
     public List<Concert> getAllConcerts() {
-        concertRepository.basicConcerts();
         return concertRepository.getConcerts();
     }
 
