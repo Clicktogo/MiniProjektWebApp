@@ -62,4 +62,36 @@ public class ConcertController {
 
         return ("/shoppingCart");
     }
+
+    @GetMapping("/events")
+    public String sortAndFilter(HttpSession session, @RequestParam(required = false) String sort, @RequestParam(required = false) String filter) {
+        if (sort != null) {
+            if (sort.equalsIgnoreCase("Pris"))   {
+                session.setAttribute("concertList", service.sortByPrice());
+            }
+            else if (sort.equalsIgnoreCase("Artist"))    {
+                service.sortByArtistName();
+                session.setAttribute("concertList", service.sortByArtistName());
+            }
+        }
+
+        if (filter != null) {
+            switch (filter) {
+                case "Goteborg":
+                    session.setAttribute("concertList", service.getCityFilteredConcerts("Göteborg"));
+                    break;
+                case "Stockholm":
+                    session.setAttribute("concertList", service.getCityFilteredConcerts("Stockholm"));
+                    break;
+                case "Malmo":
+                    session.setAttribute("concertList", service.getCityFilteredConcerts("Malmö"));
+                    break;
+                case "Orebro":
+                    session.setAttribute("concertList", service.getCityFilteredConcerts("Örebro"));
+                    break;
+            }
+
+        }
+        return "allEvents";
+    }
 }
