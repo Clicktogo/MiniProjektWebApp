@@ -60,7 +60,7 @@ public class EventService {
     public boolean buyTickets(HttpSession session, HashMap<Concert, Integer> shoppingCartList, int tickets) {
         Concert tempConcert = (Concert)session.getAttribute("concert");
         if(!tempConcert.isNotFull(tickets)) {
-            session.setAttribute("buyAlert", "Köpet misslyckades! Du försökte köpa " + tickets + " biljetter men det finns bara " + tempConcert.getFreeSpots() + " bijletter kvar.");
+            session.setAttribute("buyAlert", "Misslyckades! Du försökte köpa " + tickets + " biljetter men det finns bara " + tempConcert.getFreeSpots() + " biljetter kvar.");
             return false;
         }
         tempConcert.buyTicket(tickets);
@@ -70,7 +70,7 @@ public class EventService {
             } else {
                 shoppingCartList.put((Concert)session.getAttribute("concert"), tickets + tempQuantity);
             }
-        session.setAttribute("buyAlert", "Köpet lyckades! Du lade till " + tickets + " biljetter till din kundkorg.");
+        session.setAttribute("buyAlert", "Lyckades! Du lade till " + tickets + " biljetter till din kundkorg.");
             return true;
     }
 

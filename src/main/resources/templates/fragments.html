@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" th:href="'/'">Startsida</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="'/'">Kundkorg</a>
+          <a class="nav-link active" aria-current="page" th:href="'/shoppingcart'">Kundkorg</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,6 +39,26 @@
     </div>
   </div>
 </nav>
+</div>
+<div th:fragment="popupBuy">
+  <div class="modal" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Betalning av biljetter</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Du har genomfört köpet!</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">jag vill handla mera</button>
+          <a href="/"><button type="button" class="btn btn-primary">OK, vi ses!</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>

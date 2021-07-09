@@ -11,16 +11,6 @@ import java.util.List;
 public class UnitTest {
 
     @Test
-    public void buyTicketTest(){
-        EventService service =  new EventService();
-        HashMap<Concert, Integer> testMap = new HashMap<>();
-        Concert testConcert = new Concert(1, "Iron Maiden", "12/8", 1099, new Arena("Ullevi", "Ullevigatan", "Göteborg", 75000), "Bla bla bla");
-        //Assert.assertTrue(service.buyTickets(session,testMap, 74999));
-        //Assert.assertTrue(service.buyTickets(testConcert, 1));
-    }
-
-
-    @Test
     public void sortingArtistTest(){
         List<Concert> testList = new ArrayList<>();
         testList.add(new Concert(1, "Iron Maiden", "12/8", 1099, new Arena("Ullevi", "Ullevigatan", "Göteborg", 75000), "Bla bla bla"));

@@ -20,29 +20,40 @@
 <body>
 
 <div th:replace="fragments :: menuBar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Artist</th>
+                    <th scope="col">Ort</th>
+                    <th scope="col">Antal Biljetter</th>
+                    <th scope="col"> á pris</th>
+                    <th scope="col">Totalt</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="concert: ${session.shoppingCart}">
+                    <!--<th scope="row">1</th>-->
+                    <td th:text="${concert.key.artist}"></td>
+                    <td th:text="${concert.key.arena.city}"></td>
+                    <td th:text="${concert.value}"></td>
+                    <td th:text="${concert.key.ticketPrice}"></td>
+                    <td th:text="${concert.key.ticketPrice * concert.value} + ' kr'"></td>
 
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Artist</th>
-        <th scope="col">Ort</th>
-        <th scope="col">Pris</th>
-        <th scope="col">Antal Biljetter</th>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Köp</button>
 
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="concert: ${session.shoppingCart}">
-        <!--<th scope="row">1</th>-->
-        <td th:text="${concert.key.artist}"></td>
-        <td th:text="${concert.key.arena.city}"></td>
-        <td th:text="${concert.key.ticketPrice}"></td>
-        <td th:text="${concert.value}"></td>
-    </tr>
-    </tbody>
-</table>
+            <div th:replace="fragments :: popupBuy"></div>
 
-<a href="/"><button type="button" class="btn btn-warning">Köp</button></a>
+
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
