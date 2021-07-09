@@ -25,10 +25,25 @@
                 </p>
                 <p th:text="${currentConcert.concertDescription}">Example Description</p>
                 <p th:text="${currentConcert.ticketPrice}">Example 50</p>
+
+                <form action="/shoppingcart" method="post">
+                    <fieldset>
+                        <div class="mb-3">
+                            <label class="form-label">Välj antal biljetter</label>
+                            <input type="number"  class="form-control" placeholder="Antal biljetter" name="ticketQuantity">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lägg i kundvagn</button>
+                    </fieldset>
+                </form>
+                <!--<div class="btn-group" role="group" aria-label="Basic example">
+                    <a th:href="'/shoppingcart?concertId=' + ${currentConcert.concertId} + '&ticketQuantity=3'"><button type="button" class="btn btn-primary">Lägg i kundvagn</button></a>
+                </div>-->
             </div>
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>
