@@ -118,7 +118,7 @@
             <div class="col">
                 <div class="card" th:each="concert : ${concertList}">
                     <div class="card-body">
-                        <img th:src="@{${'../images/' + concert.concertId + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" width="400">
+                        <img th:src="@{${'../images/' + concert.concertId + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" class="images">
                       <!--  <img src="'../static/images/' + ${concert.concertId} + '.jpg'" width="150" heigth="200"-->
                              <!--class="card-img-top" alt="...">-->
                         <h5 class="card-title" th:text="${concert.artist}">Concert: The Iliad</h5>

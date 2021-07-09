@@ -5,3 +5,8 @@ display: inline-block;
 body {
     /*background-color: black;*/
 }
+
+.images{
+width: 300px;
+height: 275px;
+}
