@@ -1,5 +1,6 @@
 .card{
 display: inline-block;
+border: 0;
 }
 
 body {
@@ -14,6 +15,7 @@ height: 275px;
 
 
 
-/*.btn btn-warning {
-    color: rgb(255,192,90);
-}*/
+.btn-warning {
+    background-color: rgb(255,192,90);
+    border-color: rgb(255,192,90);
+}
