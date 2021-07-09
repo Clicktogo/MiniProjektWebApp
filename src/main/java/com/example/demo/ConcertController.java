@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,23 +31,7 @@ public class ConcertController {
         return "masterDetailConcert";
     }
 
-    @PostMapping("/sort")
-    public String sorting(Model model, @RequestParam String sortSelection) {
-        if (sortSelection.equalsIgnoreCase("Pris"))   {
-            model.addAttribute("concertList", service.sortByPrice());
-        }
-        else if (sortSelection.equalsIgnoreCase("Artist"))    {
-            service.sortByArtistName();
-            model.addAttribute("concertList", service.sortByArtistName());
-        }
-        return "allEvents";
-    }
 
-    @PostMapping("/filter")
-    public String filter(Model model, @RequestParam String filterSelection) {
-        model.addAttribute("concertList", service.getCityFilteredConcerts(filterSelection));
-        return "allEvents";
-    }
 
     @GetMapping("/shoppingcart")
     public String addToShoppingCart(HttpSession session, @RequestParam int concertId, @RequestParam int ticketQuantity){
@@ -63,35 +48,36 @@ public class ConcertController {
         return ("/shoppingCart");
     }
 
-    @GetMapping("/events")
-    public String sortAndFilter(HttpSession session, @RequestParam(required = false) String sort, @RequestParam(required = false) String filter) {
-        if (sort != null) {
-            if (sort.equalsIgnoreCase("Pris"))   {
-                session.setAttribute("concertList", service.sortByPrice());
-            }
-            else if (sort.equalsIgnoreCase("Artist"))    {
-                service.sortByArtistName();
-                session.setAttribute("concertList", service.sortByArtistName());
-            }
+    @GetMapping("/sort/{sort}")
+    public String sorting(Model model, @PathVariable String sort) {
+        if (sort.equalsIgnoreCase("Pris"))   {
+            model.addAttribute("concertList", service.sortByPrice());
+        }
+        else if (sort.equalsIgnoreCase("Artist"))    {
+            service.sortByArtistName();
+            model.addAttribute("concertList", service.sortByArtistName());
         }
 
-        if (filter != null) {
-            switch (filter) {
-                case "Goteborg":
-                    session.setAttribute("concertList", service.getCityFilteredConcerts("Göteborg"));
-                    break;
-                case "Stockholm":
-                    session.setAttribute("concertList", service.getCityFilteredConcerts("Stockholm"));
-                    break;
-                case "Malmo":
-                    session.setAttribute("concertList", service.getCityFilteredConcerts("Malmö"));
-                    break;
-                case "Orebro":
-                    session.setAttribute("concertList", service.getCityFilteredConcerts("Örebro"));
-                    break;
-            }
+        return "allEvents";
+    }
 
+    @GetMapping("/filter/{filter}")
+    public String filtering(@PathVariable String filter, Model model) {
+        switch (filter) {
+            case "Goteborg":
+                model.addAttribute("concertList", service.getCityFilteredConcerts("Göteborg"));
+                break;
+            case "Stockholm":
+                model.addAttribute("concertList", service.getCityFilteredConcerts("Stockholm"));
+                break;
+            case "Malmo":
+                model.addAttribute("concertList", service.getCityFilteredConcerts("Malmö"));
+                break;
+            case "Orebro":
+                model.addAttribute("concertList", service.getCityFilteredConcerts("Örebro"));
+                break;
         }
+
         return "allEvents";
     }
 }
