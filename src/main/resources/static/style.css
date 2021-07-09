@@ -12,6 +12,10 @@ width: 300px;
 height: 275px;
 }
 
+.navbar {
+    margin-bottom: 30px;
+}
+
 
 /*.btn btn-warning {
     color: rgb(255,192,90);
