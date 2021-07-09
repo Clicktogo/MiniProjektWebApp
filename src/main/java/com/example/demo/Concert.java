@@ -105,4 +105,8 @@ public class Concert implements Event, Comparable<Concert>{
                 ", ticketsSold=" + ticketsSold +
                 '}';
     }
+
+    public int getFreeSpots() {
+        return arena.getArenaCapacity() - ticketsSold;
+    }
 }

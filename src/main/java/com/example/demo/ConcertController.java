@@ -41,27 +41,22 @@ public class ConcertController {
     }
 
     @PostMapping ("/shoppingcart")
-    public String addToShoppingCart(HttpSession session, @RequestParam int ticketQuantity){
+    public String addToShoppingCart(HttpSession session,Model model, @RequestParam int ticketQuantity){
         HashMap<Concert, Integer> shoppingCartList = (HashMap<Concert, Integer>)session.getAttribute("shoppingCart");
-
-     /*   List<HashMap> shoppingCartList = (List<HashMap>) session.getAttribute("shoppingCart");*/
-
         if(shoppingCartList == null) {
             shoppingCartList = new HashMap<>();
         }
-            //service.buyTickets()
-
-        Integer tempQuantity = shoppingCartList.get(session.getAttribute("concert"));
-        if(tempQuantity == null){
-            shoppingCartList.put((Concert)session.getAttribute("concert"), ticketQuantity);
-        } else {
-            shoppingCartList.put((Concert)session.getAttribute("concert"), ticketQuantity + tempQuantity);
-        }
-
+       if (service.buyTickets(session,shoppingCartList, ticketQuantity)){
+           session.setAttribute("wasSuccessfulPurchase", true);
+       } else {
+           session.setAttribute("wasSuccessfulPurchase", false);
+       }
         session.setAttribute("itemsInCart", shoppingCartList.size());
         session.setAttribute("shoppingCart", shoppingCartList);
 
-        return ("/shoppingCart");
+        //need for redirect
+        Concert concert = (Concert)session.getAttribute("concert");
+        return "redirect:/event?eventId=" + concert.getConcertId();
     }
 
     @GetMapping("/sort/{sort}")

@@ -27,6 +27,14 @@
                 <p th:text="'Om Artisten -' + ${currentConcert.concertDescription}">Example Description</p>
                 <p th:text="'Pris -' + ${currentConcert.ticketPrice}">Example 50</p>
 
+                <span th:if="${session.wasSuccessfulPurchase != null}">
+                    <span th:if="${session.wasSuccessfulPurchase}">
+                        <div class="alert alert-success" role="alert" th:text="${session.buyAlert}"></div>
+                    </span>
+                    <span th:if="${!session.wasSuccessfulPurchase}">
+                        <div class="alert alert-danger" role="alert" th:text="${session.buyAlert}"></div>
+                    </span>
+                </span>
                 <form action="/shoppingcart" method="post">
                     <fieldset>
                         <div class="mb-3">
