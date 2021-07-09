@@ -100,8 +100,10 @@
                       <!--  <img src="'../static/images/' + ${concert.concertId} + '.jpg'" width="150" heigth="200"-->
                              <!--class="card-img-top" alt="...">-->
                         <h5 class="card-title" th:text="${concert.artist}">Concert: The Iliad</h5>
-                        <p class="card-text" th:text="${concert.date}">Datum: Homer</p>
-                        <p class="card-text" th:text="${concert.arena.arenaName}">Arena: Homer</p>
+                        <p class="card-text" th:text="${concert.date}">Datum: 29/5</p>
+                        <p class="card-text" th:text="${concert.arena.arenaName}">Arena: Fjällräven Arena</p>
+                        <p class="card-text" th:text="${concert.arena.city}">Stad: Ö-vik</p>
+                        <p class="card-text" th:text="${concert.ticketPrice + 'kr'}">Pris: 550</p>
                         <a th:href="'/event?eventId=' + ${concert.concertId}" class="btn btn-warning">Mer information</a>
                     </div>
                 </div>
