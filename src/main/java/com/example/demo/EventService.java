@@ -5,6 +5,8 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class EventService {
 
@@ -55,14 +57,22 @@ public class EventService {
     }
 
     //Maybe break into two methods, one checking and one buying
-    public boolean buyTickets(Concert concert, int tickets) {
-        if(concert.isNotFull(tickets)) {
-            concert.buyTicket(tickets);
-            return true;
+    public boolean buyTickets(HttpSession session, HashMap<Concert, Integer> shoppingCartList, int tickets) {
+        Concert tempConcert = (Concert)session.getAttribute("concert");
+        if(!tempConcert.isNotFull(tickets)) {
+            session.setAttribute("buyAlert", "Köpet misslyckades! Du försökte köpa " + tickets + " biljetter men det finns bara " + tempConcert.getFreeSpots() + " bijletter kvar.");
+            return false;
         }
-        return false;
+        tempConcert.buyTicket(tickets);
+        Integer tempQuantity = shoppingCartList.get(session.getAttribute("concert"));
+            if(tempQuantity == null){
+                shoppingCartList.put((Concert)session.getAttribute("concert"), tickets);
+            } else {
+                shoppingCartList.put((Concert)session.getAttribute("concert"), tickets + tempQuantity);
+            }
+        session.setAttribute("buyAlert", "Köpet lyckades! Du lade till " + tickets + " biljetter till din kundkorg.");
+            return true;
     }
-
 
 
 }
