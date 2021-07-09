@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -24,8 +25,9 @@ public class ConcertController {
     }
 
     @GetMapping("/event")
-    public String detailPage(Model model, @RequestParam int eventId)    {
+    public String detailPage(HttpSession session, Model model, @RequestParam int eventId)    {
         model.addAttribute("currentConcert", service.getConcertById(eventId));
+        session.setAttribute("concert", service.getConcertById(eventId));
 
         return "masterDetailConcert";
     }
@@ -49,17 +51,33 @@ public class ConcertController {
     }
 
     @GetMapping("/shoppingcart")
-    public String addToShoppingCart(HttpSession session, @RequestParam int concertId, @RequestParam int ticketQuantity){
-        List<Concert> shoppingCartList = (List<Concert>) session.getAttribute("shoppingCart");
+    public String displayToShoppingCart(HttpSession session){
+        return ("/shoppingCart");
+    }
+
+    @PostMapping ("/shoppingcart")
+    public String addToShoppingCart(HttpSession session, @RequestParam int ticketQuantity){
+        HashMap<Concert, Integer> shoppingCartList = (HashMap<Concert, Integer>)session.getAttribute("shoppingCart");
+
+     /*   List<HashMap> shoppingCartList = (List<HashMap>) session.getAttribute("shoppingCart");*/
 
         if(shoppingCartList == null) {
-            shoppingCartList = new ArrayList<>();
+            shoppingCartList = new HashMap<>();
         }
 
-        shoppingCartList.add(service.getConcertById(concertId));
+        Integer tempQuantity = shoppingCartList.get(session.getAttribute("concert"));
+        if(tempQuantity == null){
+            shoppingCartList.put((Concert)session.getAttribute("concert"), ticketQuantity);
+        } else {
+            shoppingCartList.put((Concert)session.getAttribute("concert"), ticketQuantity + tempQuantity);
+        }
+
         session.setAttribute("itemsInCart", shoppingCartList.size());
         session.setAttribute("shoppingCart", shoppingCartList);
 
         return ("/shoppingCart");
     }
+
+
+
 }
