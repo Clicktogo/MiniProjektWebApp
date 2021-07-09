@@ -20,8 +20,9 @@ public class ConcertController {
     EventService service;
 
     @GetMapping("/")
-    public String allConcerts(Model model)  {
+    public String allConcerts(Model model, HttpSession session)  {
         model.addAttribute("concertList", service.getAllConcerts());
+        session.setAttribute("wasSuccessfulPurchase", null);
         return "allEvents";
     }
 
@@ -29,6 +30,7 @@ public class ConcertController {
     public String detailPage(HttpSession session, Model model, @RequestParam int eventId)    {
         model.addAttribute("currentConcert", service.getConcertById(eventId));
         session.setAttribute("concert", service.getConcertById(eventId));
+
 
         return "masterDetailConcert";
     }
