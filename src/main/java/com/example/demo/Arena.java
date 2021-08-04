@@ -1,10 +1,23 @@
 package com.example.demo;
 
+import javax.persistence.*;
+
+@Entity
 public class Arena {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "ARENA_NAME")
     private String arenaName;
     private String address;
     private String city;
+    @Column(name = "ARENA_CAPACITY")
     private int arenaCapacity;
+    //@OneToMany(mappedBy = "")
+
+    public Arena() {
+    }
 
     public Arena(String arenaName, String address, String city, int arenaCapacity) {
         this.arenaName = arenaName;
@@ -43,6 +56,14 @@ public class Arena {
 
     public void setArenaCapacity(int arenaCapacity) {
         this.arenaCapacity = arenaCapacity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

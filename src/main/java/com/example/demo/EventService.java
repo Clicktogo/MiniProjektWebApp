@@ -11,10 +11,10 @@ import javax.servlet.http.HttpSession;
 public class EventService {
 
     @Autowired
-    ConcertRepository concertRepository;
+    OldConcertRepository concertRepository;
 
     public EventService() {
-        this.concertRepository = new ConcertRepository();
+        this.concertRepository = new OldConcertRepository();
     }
 
     public void addConcert(Concert concert) {
@@ -39,13 +39,13 @@ public class EventService {
 
     public Concert getConcertById(int eventId) {
         for (Concert c : concertRepository.getConcerts()){
-            if (c.getConcertId() == eventId) {
+            if (c.getId() == eventId) {
                 return c;
             }
         }
         return null;
     }
-
+/*
     public List<Concert> getCityFilteredConcerts(String city) {
         List<Concert> filteredList = new ArrayList<>();
         for (Concert c : concertRepository.getConcerts()){
@@ -74,5 +74,5 @@ public class EventService {
             return true;
     }
 
-
+*/
 }

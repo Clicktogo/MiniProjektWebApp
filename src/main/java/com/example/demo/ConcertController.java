@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,18 +17,21 @@ public class ConcertController {
 
     @Autowired
     EventService service;
-
+    @Autowired
+    ConcertRepository concertRepository;
+/*
     @GetMapping("/")
     public String allConcerts(Model model, HttpSession session)  {
-        model.addAttribute("concertList", service.getAllConcerts());
+        model.addAttribute("concertList", (List<Concert>)concertRepository.findAll());
         session.setAttribute("wasSuccessfulPurchase", null);
         return "allEvents";
     }
 
     @GetMapping("/event")
-    public String detailPage(HttpSession session, Model model, @RequestParam int eventId)    {
-        model.addAttribute("currentConcert", service.getConcertById(eventId));
-        session.setAttribute("concert", service.getConcertById(eventId));
+    public String detailPage(HttpSession session, Model model, @RequestParam Long eventId)    {
+        Concert concert = concertRepository.findById(eventId).get();
+        model.addAttribute("currentConcert", concert);
+        session.setAttribute("concert", concert);
 
 
         return "masterDetailConcert";
@@ -58,16 +60,18 @@ public class ConcertController {
 
         //need for redirect
         Concert concert = (Concert)session.getAttribute("concert");
-        return "redirect:/event?eventId=" + concert.getConcertId();
+        return "redirect:/event?eventId=" + concert.getId();
     }
 
     @GetMapping("/sort/{sort}")
     public String sorting(Model model, @PathVariable String sort) {
+
         if (sort.equalsIgnoreCase("Pris"))   {
-            model.addAttribute("concertList", service.sortByPrice());
+            List<Concert> concerts = concertRepository.findAllByOrderByTicketPrice();
+            model.addAttribute("concertList", concerts);
         }
         else if (sort.equalsIgnoreCase("Artist"))    {
-            service.sortByArtistName();
+            List<Concert> concerts = concertRepository.findAllByOrderByArtistByName();
             model.addAttribute("concertList", service.sortByArtistName());
         }
 
@@ -93,4 +97,6 @@ public class ConcertController {
 
         return "allEvents";
     }
+*/
+
 }

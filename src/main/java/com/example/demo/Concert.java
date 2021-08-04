@@ -1,35 +1,40 @@
 package com.example.demo;
 
-import java.util.Comparator;
+import javax.persistence.*;
 
-public class Concert implements Event, Comparable<Concert>{
-    private int concertId;
+@Entity
+public class Concert implements Comparable<Concert>{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String artist;
     private String date;
     private int ticketPrice;
+    @ManyToOne
     private Arena arena;
     private String concertDescription;
     private int ticketsSold;
+    private String pictureAddress;
 
-    public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
-        this.concertId = concertId;
+    public Concert() {
+    }
+
+    public Concert(String artist, String date, int ticketPrice, Arena arena, String concertDescription, String pictureAddress) {
         this.artist = artist;
         this.date = date;
         this.ticketPrice = ticketPrice;
         this.arena = arena;
         this.concertDescription = concertDescription;
         this.ticketsSold = 0;
+        this.pictureAddress = pictureAddress;
     }
 
-    public Concert() {
+    public Long getId() {
+        return id;
     }
 
-    public int getConcertId() {
-        return concertId;
-    }
-
-    public void setConcertId(int concertId) {
-        this.concertId = concertId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getArtist() {
@@ -61,7 +66,7 @@ public class Concert implements Event, Comparable<Concert>{
     }
 
     public void setArena(Arena arena) {
-        this.arena = arena;
+        this.arena = this.arena;
     }
 
     public void setConcertDescription(String concertDescription) {
@@ -72,12 +77,14 @@ public class Concert implements Event, Comparable<Concert>{
         return concertDescription;
     }
 
-    public boolean isNotFull(int tickets) {
+    /*public boolean isNotFull(int tickets) {
         if( ticketsSold + tickets <= arena.getArenaCapacity()) {
             return true;
         }
     return false;
     }
+
+     */
 
     public void buyTicket(int tickets) {
       ticketsSold += tickets;
@@ -93,10 +100,10 @@ public class Concert implements Event, Comparable<Concert>{
         return 1;
     }
 
-    @Override
+   /* @Override
     public String toString() {
         return "Concert{" +
-                "concertId=" + concertId +
+                "concertId=" + id +
                 ", artist='" + artist + '\'' +
                 ", date='" + date + '\'' +
                 ", ticketPrice=" + ticketPrice +
@@ -109,4 +116,6 @@ public class Concert implements Event, Comparable<Concert>{
     public int getFreeSpots() {
         return arena.getArenaCapacity() - ticketsSold;
     }
+
+    */
 }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UnitTest {
-
+/*
     @Test
     public void sortingArtistTest(){
         List<Concert> testList = new ArrayList<>();
@@ -33,4 +33,6 @@ public class UnitTest {
 
         Assert.assertEquals(testList.toString(), sortedList.toString());
     }
+
+ */
 }
