@@ -15,11 +15,11 @@ import java.util.List;
 @Controller
 public class ConcertController {
 
-    @Autowired
-    EventService service;
+    /*@Autowired
+    EventService service;*/
     @Autowired
     ConcertRepository concertRepository;
-/*
+
     @GetMapping("/")
     public String allConcerts(Model model, HttpSession session)  {
         model.addAttribute("concertList", (List<Concert>)concertRepository.findAll());
@@ -33,11 +33,8 @@ public class ConcertController {
         model.addAttribute("currentConcert", concert);
         session.setAttribute("concert", concert);
 
-
         return "masterDetailConcert";
     }
-
-
 
     @GetMapping("/shoppingcart")
     public String displayToShoppingCart(HttpSession session){
@@ -50,7 +47,7 @@ public class ConcertController {
         if(shoppingCartList == null) {
             shoppingCartList = new HashMap<>();
         }
-       if (service.buyTickets(session,shoppingCartList, ticketQuantity)){
+       if (buyTickets(session,shoppingCartList, ticketQuantity)){
            session.setAttribute("wasSuccessfulPurchase", true);
        } else {
            session.setAttribute("wasSuccessfulPurchase", false);
@@ -72,7 +69,7 @@ public class ConcertController {
         }
         else if (sort.equalsIgnoreCase("Artist"))    {
             List<Concert> concerts = concertRepository.findAllByOrderByArtistByName();
-            model.addAttribute("concertList", service.sortByArtistName());
+            model.addAttribute("concertList", concertRepository.findAllByOrderByArtistByName());
         }
 
         return "allEvents";
@@ -82,21 +79,40 @@ public class ConcertController {
     public String filtering(@PathVariable String filter, Model model) {
         switch (filter) {
             case "Goteborg":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Göteborg"));
+                model.addAttribute("concertList", concertRepository.findAllByFilterByCity("Göteborg"));
                 break;
             case "Stockholm":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Stockholm"));
+                model.addAttribute("concertList", concertRepository.findAllByFilterByCity("Stockholm"));
                 break;
             case "Malmo":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Malmö"));
+                model.addAttribute("concertList", concertRepository.findAllByFilterByCity("Malmö"));
                 break;
             case "Orebro":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Örebro"));
+                model.addAttribute("concertList", concertRepository.findAllByFilterByCity("Örebro"));
                 break;
         }
 
         return "allEvents";
     }
-*/
 
+    public boolean buyTickets(HttpSession session, HashMap<Concert, Integer> shoppingCartList, int tickets) {
+        Concert tempConcert = (Concert)session.getAttribute("concert");
+        if(!tempConcert.isNotFull(tickets)) {
+            session.setAttribute("buyAlert", "Misslyckades! Du försökte köpa " + tickets + " biljetter men det finns bara " + getFreeSpots(tempConcert.getArena(), tempConcert) + " biljetter kvar.");
+            return false;
+        }
+        tempConcert.buyTicket(tickets);
+        Integer tempQuantity = shoppingCartList.get(session.getAttribute("concert"));
+        if(tempQuantity == null){
+            shoppingCartList.put((Concert)session.getAttribute("concert"), tickets);
+        } else {
+            shoppingCartList.put((Concert)session.getAttribute("concert"), tickets + tempQuantity);
+        }
+        session.setAttribute("buyAlert", "Lyckades! Du lade till " + tickets + " biljetter till din kundkorg.");
+        return true;
+    }
+
+    public int getFreeSpots(Arena arena, Concert concert) {
+        return arena.getArenaCapacity() - concert.getTicketsSold();
+    }
 }

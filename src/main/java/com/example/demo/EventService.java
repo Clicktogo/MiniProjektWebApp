@@ -45,7 +45,6 @@ public class EventService {
         }
         return null;
     }
-/*
     public List<Concert> getCityFilteredConcerts(String city) {
         List<Concert> filteredList = new ArrayList<>();
         for (Concert c : concertRepository.getConcerts()){
@@ -57,7 +56,7 @@ public class EventService {
     }
 
     //Maybe break into two methods, one checking and one buying
-    public boolean buyTickets(HttpSession session, HashMap<Concert, Integer> shoppingCartList, int tickets) {
+/*    public boolean buyTickets(HttpSession session, HashMap<Concert, Integer> shoppingCartList, int tickets) {
         Concert tempConcert = (Concert)session.getAttribute("concert");
         if(!tempConcert.isNotFull(tickets)) {
             session.setAttribute("buyAlert", "Misslyckades! Du försökte köpa " + tickets + " biljetter men det finns bara " + tempConcert.getFreeSpots() + " biljetter kvar.");
@@ -72,7 +71,6 @@ public class EventService {
             }
         session.setAttribute("buyAlert", "Lyckades! Du lade till " + tickets + " biljetter till din kundkorg.");
             return true;
-    }
+    }*/
 
-*/
 }

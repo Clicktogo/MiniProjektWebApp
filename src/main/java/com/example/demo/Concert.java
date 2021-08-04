@@ -13,6 +13,7 @@ public class Concert implements Comparable<Concert>{
     @ManyToOne
     private Arena arena;
     private String concertDescription;
+
     private int ticketsSold;
     private String pictureAddress;
 
@@ -69,6 +70,22 @@ public class Concert implements Comparable<Concert>{
         this.arena = this.arena;
     }
 
+    public int getTicketsSold() {
+        return ticketsSold;
+    }
+
+    public void setTicketsSold(int ticketsSold) {
+        this.ticketsSold = ticketsSold;
+    }
+
+    public String getPictureAddress() {
+        return pictureAddress;
+    }
+
+    public void setPictureAddress(String pictureAddress) {
+        this.pictureAddress = pictureAddress;
+    }
+
     public void setConcertDescription(String concertDescription) {
         this.concertDescription = concertDescription;
     }
@@ -77,14 +94,13 @@ public class Concert implements Comparable<Concert>{
         return concertDescription;
     }
 
-    /*public boolean isNotFull(int tickets) {
+    public boolean isNotFull(int tickets) {
         if( ticketsSold + tickets <= arena.getArenaCapacity()) {
             return true;
         }
     return false;
     }
 
-     */
 
     public void buyTicket(int tickets) {
       ticketsSold += tickets;
