@@ -68,8 +68,8 @@ public class ConcertController {
             model.addAttribute("concertList", concerts);
         }
         else if (sort.equalsIgnoreCase("Artist"))    {
-            List<Concert> concerts = concertRepository.findAllByOrderByArtistByName();
-            model.addAttribute("concertList", concertRepository.findAllByOrderByArtistByName());
+            List<Concert> concerts = concertRepository.findAllByOrderByArtist();
+            model.addAttribute("concertList", concertRepository.findAllByOrderByArtist());
         }
 
         return "allEvents";

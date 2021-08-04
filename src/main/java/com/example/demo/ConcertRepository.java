@@ -9,8 +9,8 @@ public interface ConcertRepository extends CrudRepository<Concert, Long> {
 
     public List<Concert> findAllByOrderByTicketPrice();
 
-   public List<Concert> findAllByOrderByArtistByName();
+   public List<Concert> findAllByOrderByArtist();
 
-   @Query(value = "SELECT * FROM Concert JOIN Arena ON Arena.ArenaId = Concert.arena.id WHERE Arena.name = ?1", nativeQuery = true)
-   public List<Concert> findAllByFilterByCity(String arenaName);
+   @Query(value = "SELECT * FROM Concert JOIN Arena ON Arena.id = Concert.arena_id WHERE Arena.city = ?1", nativeQuery = true)
+   public List<Concert> findAllByFilterByCity(String arenaCity);
 }

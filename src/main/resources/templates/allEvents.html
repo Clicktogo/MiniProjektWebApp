@@ -69,7 +69,7 @@
             <div class="col">
                 <div class="card" th:each="concert : ${concertList}">
                     <div class="card-body">
-                        <img th:src="@{${'../images/' + concert.concertId + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" class="images">
+                        <img th:src="@{${'../images/' + concert.id + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" class="images">
                       <!--  <img src="'../static/images/' + ${concert.concertId} + '.jpg'" width="150" heigth="200"-->
                              <!--class="card-img-top" alt="...">-->
                         <h5 class="card-title" th:text="${concert.artist}">Concert: The Iliad</h5>
@@ -77,7 +77,7 @@
                         <p class="card-text" th:text="${concert.arena.arenaName}">Arena: Fjällräven Arena</p>
                         <p class="card-text" th:text="${concert.arena.city}">Stad: Ö-vik</p>
                         <p class="card-text" th:text="${concert.ticketPrice + 'kr'}">Pris: 550</p>
-                        <a th:href="'/event?eventId=' + ${concert.concertId}" class="btn btn-warning">Mer information</a>
+                        <a th:href="'/event?eventId=' + ${concert.id}" class="btn btn-warning">Mer information</a>
                     </div>
                 </div>
             </div>
