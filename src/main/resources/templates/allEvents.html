@@ -12,12 +12,6 @@
     <link rel="stylesheet" type="text/css" th:href="${'/style.css'}" href="../static/style.css">
     <title>Title</title>
 </head>
-<style>
-    .card-body {
-        background-color: black;
-        color: antiquewhite;
-    }
-</style>
 
 <body>
 
@@ -34,7 +28,7 @@
     <div class="row align-items-start">
 
         <div class="row row-col-3">
-            <div class="col">
+            <div class="col flexiflex-to-align">
                 <div class="card" th:each="concert : ${concertList}">
                     <div class="card-body">
                         <div class="image-wrapper">
