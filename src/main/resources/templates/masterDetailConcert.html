@@ -24,13 +24,13 @@
 
 <body>
 
-<div th:replace="fragments :: menuBar"></div>
+<div th:replace="fragments :: menuBarDetailPage"></div>
 
 <div class="container">
     <div class="row align-items-start">
         <div class="row">
             <div class="col">
-                <img class="imgDetail" th:src="@{${'../images/' + currentConcert.concertId + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" width="400">
+                <img class="imgDetail" th:src="@{${'../images/' + currentConcert.id + '.jpg'}}" src="../images/1.jpg" alt="Summer reading" width="400">
                 <h1 th:text="${currentConcert.artist + ' på ' + currentConcert.arena.arenaName}">Exempel Artist på Arena</h1>
                 <p >
                 <p th:text="${currentConcert.concertDescription}">Example Description</p>
@@ -57,7 +57,7 @@
                     </fieldset>
                 </form>
                 <!--<div class="btn-group" role="group" aria-label="Basic example">
-                    <a th:href="'/shoppingcart?concertId=' + ${currentConcert.concertId} + '&ticketQuantity=3'"><button type="button" class="btn btn-primary">Lägg i kundvagn</button></a>
+                    <a th:href="'/shoppingcart?id=' + ${currentConcert.id} + '&ticketQuantity=3'"><button type="button" class="btn btn-primary">Lägg i kundvagn</button></a>
                 </div>-->
             </div>
         </div>

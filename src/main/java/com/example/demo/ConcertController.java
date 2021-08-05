@@ -14,20 +14,22 @@ import java.util.HashMap;
 @Controller
 public class ConcertController {
 
+
+
     @Autowired
-    EventService service;
+    ConcertRepository concertRepository;
 
     @GetMapping("/")
     public String allConcerts(Model model, HttpSession session)  {
-        model.addAttribute("concertList", service.getAllConcerts());
+        model.addAttribute("concertList", concertRepository.getAll());
         session.setAttribute("wasSuccessfulPurchase", null);
         return "allEvents";
     }
 
     @GetMapping("/event")
     public String detailPage(HttpSession session, Model model, @RequestParam int eventId)    {
-        model.addAttribute("currentConcert", service.getConcertById(eventId));
-        session.setAttribute("concert", service.getConcertById(eventId));
+        model.addAttribute("currentConcert", concertRepository.getConcertById(eventId));
+        session.setAttribute("concert", concertRepository.getConcertById(eventId));
 
 
         return "masterDetailConcert";
@@ -46,27 +48,35 @@ public class ConcertController {
         if(shoppingCartList == null) {
             shoppingCartList = new HashMap<>();
         }
-       if (service.buyTickets(session,shoppingCartList, ticketQuantity)){
-           session.setAttribute("wasSuccessfulPurchase", true);
-       } else {
-           session.setAttribute("wasSuccessfulPurchase", false);
-       }
+
+        session.setAttribute("wasSuccessfulPurchase", false);
+        Concert concert = (Concert) session.getAttribute("concert");
+
+        if(concert.isNotFull(ticketQuantity)) {
+            concert.buyTicket(ticketQuantity);
+            concertRepository.updateConcertTicketsSold(concert);
+            session.setAttribute("wasSuccessfulPurchase", true);
+            shoppingCartList.put(concert, ticketQuantity);
+            session.setAttribute("buyAlert", "Det gick bra hörru!");
+        } else  {
+            int ticketsRemaining = concert.getArena().getArenaCapacity() - concert.getTicketsSold();
+            session.setAttribute("buyAlert", "Det gick int bra hörru! Finns bara " + ticketsRemaining + " kvar...");
+        }
+
         session.setAttribute("itemsInCart", shoppingCartList.size());
         session.setAttribute("shoppingCart", shoppingCartList);
 
         //need for redirect
-        Concert concert = (Concert)session.getAttribute("concert");
         return "redirect:/event?eventId=" + concert.getId();
     }
 
     @GetMapping("/sort/{sort}")
     public String sorting(Model model, @PathVariable String sort) {
         if (sort.equalsIgnoreCase("Pris"))   {
-            model.addAttribute("concertList", service.sortByPrice());
+            model.addAttribute("concertList", concertRepository.getConcertsByPrice());
         }
         else if (sort.equalsIgnoreCase("Artist"))    {
-            service.sortByArtistName();
-            model.addAttribute("concertList", service.sortByArtistName());
+            model.addAttribute("concertList", concertRepository.getConcertsByArtistSafe());
         }
 
         return "allEvents";
@@ -76,16 +86,16 @@ public class ConcertController {
     public String filtering(@PathVariable String filter, Model model) {
         switch (filter) {
             case "Goteborg":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Göteborg"));
+                model.addAttribute("concertList", concertRepository.getConcertsByCity("Göteborg"));
                 break;
             case "Stockholm":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Stockholm"));
+                model.addAttribute("concertList", concertRepository.getConcertsByCity("Stockholm"));
                 break;
             case "Malmo":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Malmö"));
+                model.addAttribute("concertList", concertRepository.getConcertsByCity("Malmö"));
                 break;
             case "Orebro":
-                model.addAttribute("concertList", service.getCityFilteredConcerts("Örebro"));
+                model.addAttribute("concertList", concertRepository.getConcertsByCity("Örebro"));
                 break;
         }
 

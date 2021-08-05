@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class EventService {
-
+/*
     @Autowired
     ConcertRepository concertRepository;
 
@@ -74,5 +74,5 @@ public class EventService {
             return true;
     }
 
-
+*/
 }

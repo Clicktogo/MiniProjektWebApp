@@ -50,7 +50,7 @@ public class ConcertRepository {
         return concerts;
     }
 
-    public List<Concert> getConcertsByArtistSafe(String artist) {
+    public List<Concert> getConcertsByArtistSafe() {
         List<Concert> concerts = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM CONCERT ORDER BY artist");) {
@@ -96,20 +96,34 @@ public class ConcertRepository {
         return concerts;
     }
 
-    public List<Concert> getConcertsByCity(String city) {
-        List<Concert> concerts = new ArrayList<>();
+    /*
+    public int getTicketsSold(Integer id) {
+        int ticketsSold = 0;
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM CONCERT JOIN arena ON concert.arena_id = arena.id WHERE arena.city =?");) {
-            preparedStatement.setString(1, city);
+             PreparedStatement preparedStatement = conn.prepareStatement(
+                     "SELECT TICKETS_SOLD FROM Concert WHERE Concert.ID=?");) {
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
+
             while (rs.next()) {
-                Concert concert = rsConcert(rs);
-                concerts.add(concert);
+              ticketsSold = rs.getInt(1);
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return concerts;
+        return ticketsSold;
+    }*/
+
+    public void updateConcertTicketsSold(Concert concert) {
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement("UPDATE CONCERT SET TICKETS_SOLD = ? WHERE CONCERT.ID = ?");) {
+            preparedStatement.setInt(1, concert.getTicketsSold());
+            preparedStatement.setInt(2, concert.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private Concert rsConcert(ResultSet rs) throws SQLException {
