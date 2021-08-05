@@ -96,24 +96,6 @@ public class ConcertRepository {
         return concerts;
     }
 
-    /*
-    public int getTicketsSold(Integer id) {
-        int ticketsSold = 0;
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(
-                     "SELECT TICKETS_SOLD FROM Concert WHERE Concert.ID=?");) {
-            preparedStatement.setInt(1, id);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-              ticketsSold = rs.getInt(1);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ticketsSold;
-    }*/
 
     public void updateConcertTicketsSold(Concert concert) {
         try (Connection conn = dataSource.getConnection();
