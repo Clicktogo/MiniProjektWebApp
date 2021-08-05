@@ -12,10 +12,10 @@ public class ConcertRepository {
 
     public ConcertRepository() {
         concerts = new ArrayList<>();
-        basicConcerts();
+
     }
 
-    public void basicConcerts() {
+    /*public void basicConcerts() {
         concerts.add(new Concert(1, "Iron Maiden", "12/8", 1099, new Arena("Ullevi", "Ullevigatan", "Göteborg", 75000), "Iron Maiden är ett engelskt heavy metal-band som bildades den 25 december 1975 av Steve Harris, basist och huvudsaklig låtskrivare. Iron Maidens låtar är " +
                 "ofta progressiva med mycket melodier och tempobyten, och texterna har ofta ett skönlitterärt, historiskt eller filmiskt tema. Bandet är ett av de mest inflytelserika och framgångsrika inom musikgenren heavy metal och har sålt cirka 100 miljoner album. " +
                 "Sedan albumdebuten 1980 har bandet haft tre olika sångare, fyra olika gitarrister och två olika trummisar. Innan albumdebuten förekom ytterligare tretton kortvariga medlemmar."));
@@ -47,7 +47,7 @@ public class ConcertRepository {
         concerts.add(new Concert(12, "Deorro", "28/7", 750, new Arena("Malmö arena", "Arenagatan", "Malmö", 13000), "Deorro, is an American DJ signed to Ultra Records. He formerly used the name TON!C. " +
                 "In December 2014, he released the single \"Perdoname\", which achieved success in Poland after its appearance in Microsoft Windows TV commercial. In March 2015, he released a third version of \"Five Hours\" with Chris Brown, titled \"Five More Hours\". The song has charted in Ireland, the Netherlands, and Sweden. " +
                 "On 31 March 2017, Deorro released his debut album, Good Evening, which features 26 tracks, including his new single \"Rise and Shine\"."));
-    }
+    }*/
 
     public void addConcert(Concert concert) {
         concerts.add(concert);

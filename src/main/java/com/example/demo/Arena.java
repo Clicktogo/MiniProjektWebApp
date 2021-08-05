@@ -1,6 +1,7 @@
 package com.example.demo;
 
 public class Arena {
+    private int id;
     private String arenaName;
     private String address;
     private String city;
@@ -43,6 +44,14 @@ public class Arena {
 
     public void setArenaCapacity(int arenaCapacity) {
         this.arenaCapacity = arenaCapacity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

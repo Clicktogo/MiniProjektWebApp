@@ -1,18 +1,16 @@
 package com.example.demo;
 
-import java.util.Comparator;
-
 public class Concert implements Event, Comparable<Concert>{
-    private int concertId;
+    private int id;
     private String artist;
     private String date;
     private int ticketPrice;
     private Arena arena;
     private String concertDescription;
     private int ticketsSold;
+    private String pictureAddress;
 
-    public Concert(int concertId, String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
-        this.concertId = concertId;
+    public Concert(String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
         this.artist = artist;
         this.date = date;
         this.ticketPrice = ticketPrice;
@@ -24,12 +22,12 @@ public class Concert implements Event, Comparable<Concert>{
     public Concert() {
     }
 
-    public int getConcertId() {
-        return concertId;
+    public int getId() {
+        return id;
     }
 
-    public void setConcertId(int concertId) {
-        this.concertId = concertId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getArtist() {
@@ -72,6 +70,22 @@ public class Concert implements Event, Comparable<Concert>{
         return concertDescription;
     }
 
+    public int getTicketsSold() {
+        return ticketsSold;
+    }
+
+    public void setTicketsSold(int ticketsSold) {
+        this.ticketsSold = ticketsSold;
+    }
+
+    public String getPictureAddress() {
+        return pictureAddress;
+    }
+
+    public void setPictureAddress(String pictureAddress) {
+        this.pictureAddress = pictureAddress;
+    }
+
     public boolean isNotFull(int tickets) {
         if( ticketsSold + tickets <= arena.getArenaCapacity()) {
             return true;
@@ -96,7 +110,7 @@ public class Concert implements Event, Comparable<Concert>{
     @Override
     public String toString() {
         return "Concert{" +
-                "concertId=" + concertId +
+                "concertId=" + id +
                 ", artist='" + artist + '\'' +
                 ", date='" + date + '\'' +
                 ", ticketPrice=" + ticketPrice +
@@ -109,4 +123,6 @@ public class Concert implements Event, Comparable<Concert>{
     public int getFreeSpots() {
         return arena.getArenaCapacity() - ticketsSold;
     }
+
+
 }

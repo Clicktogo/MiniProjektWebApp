@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
 public class ConcertController {
@@ -58,7 +56,7 @@ public class ConcertController {
 
         //need for redirect
         Concert concert = (Concert)session.getAttribute("concert");
-        return "redirect:/event?eventId=" + concert.getConcertId();
+        return "redirect:/event?eventId=" + concert.getId();
     }
 
     @GetMapping("/sort/{sort}")
