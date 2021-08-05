@@ -1,7 +1,7 @@
 package com.example.demo;
 
 public class Concert implements Event, Comparable<Concert>{
-    private int id;
+    private Integer id;
     private String artist;
     private String date;
     private int ticketPrice;
@@ -10,23 +10,25 @@ public class Concert implements Event, Comparable<Concert>{
     private int ticketsSold;
     private String pictureAddress;
 
-    public Concert(String artist, String date, int ticketPrice, Arena arena, String concertDescription) {
+    public Concert(Integer id, String artist, String date, int ticketPrice, Arena arena, String concertDescription, int ticketsSold, String pictureAddress) {
+        this.id = id;
         this.artist = artist;
         this.date = date;
         this.ticketPrice = ticketPrice;
         this.arena = arena;
         this.concertDescription = concertDescription;
-        this.ticketsSold = 0;
+        this.ticketsSold = ticketsSold;
+        this.pictureAddress = pictureAddress;
     }
 
     public Concert() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

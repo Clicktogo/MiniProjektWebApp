@@ -1,13 +1,14 @@
 package com.example.demo;
 
 public class Arena {
-    private int id;
+    private Integer id;
     private String arenaName;
     private String address;
     private String city;
     private int arenaCapacity;
 
-    public Arena(String arenaName, String address, String city, int arenaCapacity) {
+    public Arena(Integer id, String arenaName, String address, String city, int arenaCapacity) {
+        this.id = id;
         this.arenaName = arenaName;
         this.address = address;
         this.city = city;
@@ -46,11 +47,11 @@ public class Arena {
         this.arenaCapacity = arenaCapacity;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
