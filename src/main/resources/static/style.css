@@ -83,6 +83,10 @@ width:450px
     border-radius: 15px;
     border-color: #353434;
     height: 60%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
    }
 
 .images{
